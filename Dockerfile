@@ -1,12 +1,13 @@
 FROM docker:stable
 
-ENV CLOUD_SDK_VERSION 206.0.0
+ENV CLOUD_SDK_VERSION 211.0.0
 
 ENV PATH /google-cloud-sdk/bin:$PATH
 RUN apk --no-cache add \
         curl \
         python \
         py-crcmod \
+        terraform \
         bash \
         libc6-compat \
         openssh-client \
