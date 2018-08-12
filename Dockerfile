@@ -20,3 +20,6 @@ RUN apk --no-cache add \
     gcloud config set metrics/environment github_docker_image && \
     gcloud --version
 
+# Install kubectl binary
+
+ADD https://storage.googleapis.com/kubernetes-release/release/v1.6.4/bin/linux/amd64/kubectl /usr/local/bin/kubectl
