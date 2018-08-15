@@ -34,4 +34,3 @@ RUN apk add --no-cache py-pip && \
 # Install helm
 RUN curl https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-linux-amd64.tar.gz | tar -xzO linux-amd64/helm > /usr/local/bin/helm && \
     chmod +x /usr/local/bin/helm
-RUN helm init
