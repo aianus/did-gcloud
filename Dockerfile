@@ -1,6 +1,8 @@
 FROM docker:stable
 
 ENV CLOUD_SDK_VERSION 211.0.0
+ENV KUBECTL_VERSION 1.11.2
+ENV HELM_VERSION 2.9.1
 
 ENV PATH /google-cloud-sdk/bin:$PATH
 RUN apk --no-cache add \
@@ -22,10 +24,13 @@ RUN apk --no-cache add \
     gcloud --version
 
 # Install kubectl binary
-
-ADD https://storage.googleapis.com/kubernetes-release/release/v1.11.2/bin/linux/amd64/kubectl /usr/local/bin/kubectl
+ADD https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl /usr/local/bin/kubectl
 RUN chmod +x /usr/local/bin/kubectl
 
 # Install docker-compose
-RUN apk add --no-cache py-pip
-RUN pip install docker-compose
+RUN apk add --no-cache py-pip && \
+    pip install docker-compose
+
+# Install helm
+RUN curl https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-linux-amd64.tar.gz | tar -xzO linux-amd64/helm > /usr/local/bin/helm && \
+    chmod +x /usr/local/bin/helm
